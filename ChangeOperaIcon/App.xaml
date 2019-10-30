@@ -1,0 +1,244 @@
+﻿<Application x:Class="ChangeOperaIcon.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ChangeOperaIcon"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <SolidColorBrush x:Key="CouleurDuTexte">#FF444444</SolidColorBrush>
+        <SolidColorBrush x:Key="CouleurDesBorduresDesCheckBoxes">#FF6E6E6E</SolidColorBrush>
+        <SolidColorBrush x:Key="CouleurDesBorduresDesCheckBoxesDésactivées">#506E6E6E</SolidColorBrush>
+        <SolidColorBrush x:Key="CouleurDuTexteDésactivé">#50444444</SolidColorBrush>
+        <SolidColorBrush x:Key="CouleurDesBordures">#FFABABAB</SolidColorBrush>
+        <SolidColorBrush x:Key="CouleurDesBorduresDésactivées">#50ABABAB</SolidColorBrush>
+        <SolidColorBrush x:Key="CouleurDuFondDesBoutons">#FFFDFDFD</SolidColorBrush>
+        <SolidColorBrush x:Key="CouleurDuFondDesBoutonsDésactivés">#50FDFDFD</SolidColorBrush>
+        <SolidColorBrush x:Key="CouleurDuTexteDesListViewDésactivé">#505E5E5E</SolidColorBrush>
+        <SolidColorBrush x:Key="CouleurDesMilieuxDesRadioButtons">#FF777777</SolidColorBrush>
+
+        <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Foreground" Value="{StaticResource CouleurDuTexte}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Grid>
+                            <Rectangle x:Name="RectangleBouton" Fill="{StaticResource CouleurDuFondDesBoutons}" Stroke="{StaticResource CouleurDesBordures}"/>
+                            <ContentPresenter Content = "{TemplateBinding Content}"  HorizontalAlignment = "Center" VerticalAlignment = "Center" />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName = "RectangleBouton" Property = "Stroke" Value="#3E6DB5"/>
+                                <Setter TargetName = "RectangleBouton" Property = "StrokeThickness" Value="2"/>
+                            </Trigger>
+
+                            <Trigger Property = "IsMouseOver" Value = "True">
+                                <Setter TargetName = "RectangleBouton" Property = "Fill" Value="#D6E5FF"/>
+                                <Setter TargetName = "RectangleBouton" Property = "Stroke" Value="#A3BDE3"/>
+                                <Setter TargetName = "RectangleBouton" Property = "StrokeThickness" Value="1"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName = "RectangleBouton" Property = "Fill" Value="{StaticResource CouleurDuFondDesBoutonsDésactivés}"/>
+                                <Setter Property="Foreground" Value="{StaticResource CouleurDuTexteDésactivé}"/>
+                                <Setter TargetName = "RectangleBouton" Property = "Stroke" Value="{StaticResource CouleurDesBorduresDésactivées}"/>
+                            </Trigger>
+
+                            <Trigger Property = "IsPressed" Value = "True">
+                                <Setter TargetName = "RectangleBouton" Property = "Fill" Value="#B2CEF7"/>
+                                <Setter TargetName = "RectangleBouton" Property = "Stroke" Value="#5C6A80"/>
+                                <Setter Property = "RenderTransformOrigin" Value = "0.5,0.5" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style> <!--Style de tous les Buttons-->
+        <Style x:Key="{x:Type CheckBox}" TargetType="CheckBox">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Foreground" Value="{StaticResource CouleurDuTexte}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="Border" Width="13" Height="13" CornerRadius="0" Background="White" BorderThickness="1" BorderBrush="{StaticResource CouleurDesBorduresDesCheckBoxes}">
+                                    <Path Width="11" Height="11" x:Name="CheckMark" SnapsToDevicePixels="False" Stroke="{StaticResource CouleurDesBorduresDesCheckBoxes}" StrokeThickness="1.75" Data="M 9.5,2 L 4.25,8.5 L 1.75,5"/>
+                                </Border>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter Margin="4,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" RecognizesAccessKey="True"/>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="false">
+                                <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter TargetName="CheckMark" Property="Data" Value="M 2.5,2 L 8.5,2 L 8.5,8 L2.5,8 Z" />
+                                <Setter TargetName="CheckMark" Property="Fill" Value="{StaticResource CouleurDesBorduresDesCheckBoxes}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#C5C5C5" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#FF969696"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FF969696"/>
+                                <Setter TargetName="CheckMark" Property="Stroke" Value="#FF505050"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource CouleurDesBorduresDesCheckBoxesDésactivées}" />
+                                <Setter Property="Foreground" Value="{StaticResource CouleurDesBorduresDesCheckBoxesDésactivées}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style> <!--Style de toutes les CheckBoxes-->
+        <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Foreground" Value="{StaticResource CouleurDuTexte}"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <Border>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style> <!--Style de tous les Labels-->
+        <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Foreground" Value="{StaticResource CouleurDuTexte}"/>
+            <Setter Property="Margin" Value="-1,0,-1,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="Border" Padding="4" SnapsToDevicePixels="True" Background="White">
+                            <ContentPresenter />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property = "IsMouseOver" Value = "True">
+                                <Setter TargetName="Border" Property="Background" Value="#E6F2FA"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="{StaticResource CouleurDuTexteDesListViewDésactivé}"/>
+                            </Trigger>
+
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#CDE6F7"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style> <!--Style des items de toutes les ListBox-->
+        <Style x:Key="{x:Type ListBox}" TargetType="{x:Type ListBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border Name="Border" Background="White" BorderBrush="{StaticResource CouleurDesBordures}" BorderThickness="1">
+                            <ScrollViewer Margin="0" Focusable="false">
+                                <StackPanel Margin="2" IsItemsHost="True" />
+                            </ScrollViewer>
+                        </Border>
+                        
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style> <!--Style de toutes les ListBox-->
+        <Style x:Key="{x:Type RadioButton}" TargetType="{x:Type RadioButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Foreground" Value="{StaticResource CouleurDuTexte}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="White">
+                            <BulletDecorator.Bullet>
+                                <Grid Width="12" Height="12" >
+                                    <Ellipse x:Name="Border" Fill="White" StrokeThickness="1" Stroke="{StaticResource CouleurDesBordures}"/>
+                                    <!--Bord et fond-->
+                                    <Ellipse x:Name="CheckMark" Margin="3" Fill="{StaticResource CouleurDesMilieuxDesRadioButtons}"/>
+                                    <!--Bouton du milieu-->
+                                </Grid>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter Margin="4,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" RecognizesAccessKey="True"/>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="false">
+                                <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Fill" Value="#FFD5E1F2"/>
+                                <Setter TargetName="Border" Property="Stroke" Value="#FFA4BDE2"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Stroke" Value="{StaticResource CouleurDesBorduresDésactivées}" />
+                                <Setter Property="Foreground" Value="{StaticResource CouleurDuTexteDésactivé}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style> <!--Style de tous les RadioButtons-->
+
+        <ControlTemplate x:Key="ImageButton" TargetType="Button">
+
+            <Grid>
+                <Rectangle x:Name="RectangleBouton" Fill="{StaticResource CouleurDuFondDesBoutons}" Stroke="{StaticResource CouleurDesBordures}"/>
+                <ContentPresenter Content = "{TemplateBinding Content}"  HorizontalAlignment = "Center" VerticalAlignment = "Center" />
+            </Grid>
+
+            <ControlTemplate.Triggers>
+
+                <Trigger Property = "IsMouseOver" Value = "True">
+                    <Setter TargetName = "RectangleBouton" Property = "Fill" Value="#D6E5FF"/>
+                    <Setter TargetName = "RectangleBouton" Property = "Stroke" Value="#A3BDE3"/>
+                    <Setter TargetName = "RectangleBouton" Property = "StrokeThickness" Value="1"/>
+                </Trigger>
+
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName = "RectangleBouton" Property = "Fill" Value="{StaticResource CouleurDuFondDesBoutonsDésactivés}"/>
+                    <Setter Property="Foreground" Value="{StaticResource CouleurDuTexteDésactivé}"/>
+                    <Setter TargetName = "RectangleBouton" Property = "Stroke" Value="{StaticResource CouleurDesBorduresDésactivées}"/>
+                </Trigger>
+
+                <Trigger Property = "IsPressed" Value = "True">
+                    <Setter TargetName = "RectangleBouton" Property = "Fill" Value="#B2CEF7"/>
+                    <Setter TargetName = "RectangleBouton" Property = "Stroke" Value="#5C6A80"/>
+                    <Setter Property = "RenderTransformOrigin" Value = "0.5,0.5" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+
+        </ControlTemplate>
+
+    </Application.Resources>
+</Application>
